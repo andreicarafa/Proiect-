@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Acer\\Desktop\\proiect\\University\\University.csproj": {}
+    "C:\\Users\\Acer\\Desktop\\proiect\\Proiect-\\University\\University.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Acer\\Desktop\\proiect\\University\\University.csproj": {
+    "C:\\Users\\Acer\\Desktop\\proiect\\Proiect-\\University\\University.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Acer\\Desktop\\proiect\\University\\University.csproj",
+        "projectUniqueName": "C:\\Users\\Acer\\Desktop\\proiect\\Proiect-\\University\\University.csproj",
         "projectName": "University",
-        "projectPath": "C:\\Users\\Acer\\Desktop\\proiect\\University\\University.csproj",
+        "projectPath": "C:\\Users\\Acer\\Desktop\\proiect\\Proiect-\\University\\University.csproj",
         "packagesPath": "C:\\Users\\Acer\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Acer\\Desktop\\proiect\\University\\obj\\",
+        "outputPath": "C:\\Users\\Acer\\Desktop\\proiect\\Proiect-\\University\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Acer\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -38,7 +38,21 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.5, )"
+            },
             "Microsoft.EntityFrameworkCore.InMemory": {
+              "target": "Package",
+              "version": "[6.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[6.0.5, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[6.0.5, )"
             },
@@ -65,7 +79,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
         }
       }
     }
