@@ -22,24 +22,24 @@ namespace University.Controllers
 
         // GET: api/Student
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Student>>> GetStudents()
+        public async Task<ActionResult<IEnumerable<Student>>> GetStudentsItems()
         {
-          if (_context.Students == null)
+          if (_context.StudentsItems == null)
           {
               return NotFound();
           }
-            return await _context.Students.ToListAsync();
+            return await _context.StudentsItems.ToListAsync();
         }
 
         // GET: api/Student/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Student>> GetStudent(int id)
         {
-          if (_context.Students == null)
+          if (_context.StudentsItems == null)
           {
               return NotFound();
           }
-            var student = await _context.Students.FindAsync(id);
+            var student = await _context.StudentsItems.FindAsync(id);
 
             if (student == null)
             {
@@ -85,11 +85,11 @@ namespace University.Controllers
         [HttpPost]
         public async Task<ActionResult<Student>> PostStudent(Student student)
         {
-          if (_context.Students == null)
+          if (_context.StudentsItems == null)
           {
-              return Problem("Entity set 'UniversityContext.Students'  is null.");
+              return Problem("Entity set 'UniversityContext.StudentsItems'  is null.");
           }
-            _context.Students.Add(student);
+            _context.StudentsItems.Add(student);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetStudent", new { id = student.Id }, student);
@@ -99,17 +99,17 @@ namespace University.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteStudent(int id)
         {
-            if (_context.Students == null)
+            if (_context.StudentsItems == null)
             {
                 return NotFound();
             }
-            var student = await _context.Students.FindAsync(id);
+            var student = await _context.StudentsItems.FindAsync(id);
             if (student == null)
             {
                 return NotFound();
             }
 
-            _context.Students.Remove(student);
+            _context.StudentsItems.Remove(student);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -117,7 +117,7 @@ namespace University.Controllers
 
         private bool StudentExists(int id)
         {
-            return (_context.Students?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.StudentsItems?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

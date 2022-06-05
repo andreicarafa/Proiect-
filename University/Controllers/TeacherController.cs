@@ -22,24 +22,24 @@ namespace University.Controllers
 
         // GET: api/Teacher
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Teacher>>> GetTeachers()
+        public async Task<ActionResult<IEnumerable<Teacher>>> GetTeachersItems()
         {
-          if (_context.Teachers == null)
+          if (_context.TeachersItems == null)
           {
               return NotFound();
           }
-            return await _context.Teachers.ToListAsync();
+            return await _context.TeachersItems.ToListAsync();
         }
 
         // GET: api/Teacher/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Teacher>> GetTeacher(Guid id)
+        public async Task<ActionResult<Teacher>> GetTeacher(int id)
         {
-          if (_context.Teachers == null)
+          if (_context.TeachersItems == null)
           {
               return NotFound();
           }
-            var teacher = await _context.Teachers.FindAsync(id);
+            var teacher = await _context.TeachersItems.FindAsync(id);
 
             if (teacher == null)
             {
@@ -52,7 +52,7 @@ namespace University.Controllers
         // PUT: api/Teacher/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTeacher(Guid id, Teacher teacher)
+        public async Task<IActionResult> PutTeacher(int id, Teacher teacher)
         {
             if (id != teacher.Id)
             {
@@ -85,11 +85,11 @@ namespace University.Controllers
         [HttpPost]
         public async Task<ActionResult<Teacher>> PostTeacher(Teacher teacher)
         {
-          if (_context.Teachers == null)
+          if (_context.TeachersItems == null)
           {
-              return Problem("Entity set 'UniversityContext.Teachers'  is null.");
+              return Problem("Entity set 'UniversityContext.TeachersItems'  is null.");
           }
-            _context.Teachers.Add(teacher);
+            _context.TeachersItems.Add(teacher);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetTeacher", new { id = teacher.Id }, teacher);
@@ -97,27 +97,27 @@ namespace University.Controllers
 
         // DELETE: api/Teacher/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTeacher(Guid id)
+        public async Task<IActionResult> DeleteTeacher(int id)
         {
-            if (_context.Teachers == null)
+            if (_context.TeachersItems == null)
             {
                 return NotFound();
             }
-            var teacher = await _context.Teachers.FindAsync(id);
+            var teacher = await _context.TeachersItems.FindAsync(id);
             if (teacher == null)
             {
                 return NotFound();
             }
 
-            _context.Teachers.Remove(teacher);
+            _context.TeachersItems.Remove(teacher);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool TeacherExists(Guid id)
+        private bool TeacherExists(int id)
         {
-            return (_context.Teachers?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.TeachersItems?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

@@ -10,16 +10,19 @@ namespace University.Models
         {
             this.configuration = configuration;
         }
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+   protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(this.configuration.GetConnectionString("UniversityDatabaseConnection"));
+            optionsBuilder.UseSqlServer(this.configuration.GetConnectionString("UniversityDatabaseConnection"), builder =>
+            {
+                builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
+            });
         }
-        public DbSet<Course> Courses { get; set; } = null!;
-        public DbSet<Grade> Grades { get; set; } = null!;
-        public DbSet<Session> Sessions { get; set; } = null!;
-        public DbSet<Student> Students { get; set; } = null!;
-        public DbSet<Teacher> Teachers { get; set; } = null!;
-        public DbSet<User> Users { get; set; } = null!;
+        public DbSet<Course> CoursesItems { get; set; } = null!;
+        public DbSet<Grade> GradesItems { get; set; } = null!;
+        public DbSet<Session> SessionItems { get; set; } = null!;
+        public DbSet<Student> StudentsItems { get; set; } = null!;
+        public DbSet<Teacher> TeachersItems { get; set; } = null!;
+        public DbSet<User> UsersItems { get; set; } = null!;
     }
 
 }

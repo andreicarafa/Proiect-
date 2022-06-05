@@ -22,24 +22,24 @@ namespace University.Controllers
 
         // GET: api/Course
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Course>>> GetCourses()
+        public async Task<ActionResult<IEnumerable<Course>>> GetCoursesItems()
         {
-          if (_context.Courses == null)
+          if (_context.CoursesItems == null)
           {
               return NotFound();
           }
-            return await _context.Courses.ToListAsync();
+            return await _context.CoursesItems.ToListAsync();
         }
 
         // GET: api/Course/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Course>> GetCourse(int id)
         {
-          if (_context.Courses == null)
+          if (_context.CoursesItems == null)
           {
               return NotFound();
           }
-            var course = await _context.Courses.FindAsync(id);
+            var course = await _context.CoursesItems.FindAsync(id);
 
             if (course == null)
             {
@@ -85,11 +85,11 @@ namespace University.Controllers
         [HttpPost]
         public async Task<ActionResult<Course>> PostCourse(Course course)
         {
-          if (_context.Courses == null)
+          if (_context.CoursesItems == null)
           {
-              return Problem("Entity set 'UniversityContext.Courses'  is null.");
+              return Problem("Entity set 'UniversityContext.CoursesItems'  is null.");
           }
-            _context.Courses.Add(course);
+            _context.CoursesItems.Add(course);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetCourse", new { id = course.Id }, course);
@@ -99,17 +99,17 @@ namespace University.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCourse(int id)
         {
-            if (_context.Courses == null)
+            if (_context.CoursesItems == null)
             {
                 return NotFound();
             }
-            var course = await _context.Courses.FindAsync(id);
+            var course = await _context.CoursesItems.FindAsync(id);
             if (course == null)
             {
                 return NotFound();
             }
 
-            _context.Courses.Remove(course);
+            _context.CoursesItems.Remove(course);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -117,7 +117,7 @@ namespace University.Controllers
 
         private bool CourseExists(int id)
         {
-            return (_context.Courses?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.CoursesItems?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

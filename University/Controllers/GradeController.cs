@@ -22,24 +22,24 @@ namespace University.Controllers
 
         // GET: api/Grade
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Grade>>> GetGrades()
+        public async Task<ActionResult<IEnumerable<Grade>>> GetGradesItems()
         {
-          if (_context.Grades == null)
+          if (_context.GradesItems == null)
           {
               return NotFound();
           }
-            return await _context.Grades.ToListAsync();
+            return await _context.GradesItems.ToListAsync();
         }
 
         // GET: api/Grade/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Grade>> GetGrade(Guid id)
+        public async Task<ActionResult<Grade>> GetGrade(int id)
         {
-          if (_context.Grades == null)
+          if (_context.GradesItems == null)
           {
               return NotFound();
           }
-            var grade = await _context.Grades.FindAsync(id);
+            var grade = await _context.GradesItems.FindAsync(id);
 
             if (grade == null)
             {
@@ -52,7 +52,7 @@ namespace University.Controllers
         // PUT: api/Grade/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutGrade(Guid id, Grade grade)
+        public async Task<IActionResult> PutGrade(int id, Grade grade)
         {
             if (id != grade.Id)
             {
@@ -85,11 +85,11 @@ namespace University.Controllers
         [HttpPost]
         public async Task<ActionResult<Grade>> PostGrade(Grade grade)
         {
-          if (_context.Grades == null)
+          if (_context.GradesItems == null)
           {
-              return Problem("Entity set 'UniversityContext.Grades'  is null.");
+              return Problem("Entity set 'UniversityContext.GradesItems'  is null.");
           }
-            _context.Grades.Add(grade);
+            _context.GradesItems.Add(grade);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetGrade", new { id = grade.Id }, grade);
@@ -97,27 +97,27 @@ namespace University.Controllers
 
         // DELETE: api/Grade/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteGrade(Guid id)
+        public async Task<IActionResult> DeleteGrade(int id)
         {
-            if (_context.Grades == null)
+            if (_context.GradesItems == null)
             {
                 return NotFound();
             }
-            var grade = await _context.Grades.FindAsync(id);
+            var grade = await _context.GradesItems.FindAsync(id);
             if (grade == null)
             {
                 return NotFound();
             }
 
-            _context.Grades.Remove(grade);
+            _context.GradesItems.Remove(grade);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool GradeExists(Guid id)
+        private bool GradeExists(int id)
         {
-            return (_context.Grades?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.GradesItems?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

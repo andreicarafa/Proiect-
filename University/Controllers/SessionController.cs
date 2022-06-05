@@ -22,24 +22,24 @@ namespace University.Controllers
 
         // GET: api/Session
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Session>>> GetSessions()
+        public async Task<ActionResult<IEnumerable<Session>>> GetSessionItems()
         {
-          if (_context.Sessions == null)
+          if (_context.SessionItems == null)
           {
               return NotFound();
           }
-            return await _context.Sessions.ToListAsync();
+            return await _context.SessionItems.ToListAsync();
         }
 
         // GET: api/Session/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Session>> GetSession(Guid id)
+        public async Task<ActionResult<Session>> GetSession(int id)
         {
-          if (_context.Sessions == null)
+          if (_context.SessionItems == null)
           {
               return NotFound();
           }
-            var session = await _context.Sessions.FindAsync(id);
+            var session = await _context.SessionItems.FindAsync(id);
 
             if (session == null)
             {
@@ -52,7 +52,7 @@ namespace University.Controllers
         // PUT: api/Session/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutSession(Guid id, Session session)
+        public async Task<IActionResult> PutSession(int id, Session session)
         {
             if (id != session.Id)
             {
@@ -85,11 +85,11 @@ namespace University.Controllers
         [HttpPost]
         public async Task<ActionResult<Session>> PostSession(Session session)
         {
-          if (_context.Sessions == null)
+          if (_context.SessionItems == null)
           {
-              return Problem("Entity set 'UniversityContext.Sessions'  is null.");
+              return Problem("Entity set 'UniversityContext.SessionItems'  is null.");
           }
-            _context.Sessions.Add(session);
+            _context.SessionItems.Add(session);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetSession", new { id = session.Id }, session);
@@ -97,27 +97,27 @@ namespace University.Controllers
 
         // DELETE: api/Session/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteSession(Guid id)
+        public async Task<IActionResult> DeleteSession(int id)
         {
-            if (_context.Sessions == null)
+            if (_context.SessionItems == null)
             {
                 return NotFound();
             }
-            var session = await _context.Sessions.FindAsync(id);
+            var session = await _context.SessionItems.FindAsync(id);
             if (session == null)
             {
                 return NotFound();
             }
 
-            _context.Sessions.Remove(session);
+            _context.SessionItems.Remove(session);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool SessionExists(Guid id)
+        private bool SessionExists(int id)
         {
-            return (_context.Sessions?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.SessionItems?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

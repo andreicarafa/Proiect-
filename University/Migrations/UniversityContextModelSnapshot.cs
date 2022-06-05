@@ -36,21 +36,23 @@ namespace University.Migrations
                     b.Property<int>("IdTeacher")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("TeacherId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int?>("TeacherId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("TeacherId");
 
-                    b.ToTable("Courses");
+                    b.ToTable("CoursesItems");
                 });
 
             modelBuilder.Entity("University.Models.Grade", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int?>("CourseId")
                         .HasColumnType("int");
@@ -61,26 +63,26 @@ namespace University.Migrations
                     b.Property<int>("GradeValue")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("IdCourse")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("IdCourse")
+                        .HasColumnType("int");
 
-                    b.Property<Guid>("IdSession")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("IdSession")
+                        .HasColumnType("int");
 
-                    b.Property<Guid>("IdStudent")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("IdStudent")
+                        .HasColumnType("int");
 
-                    b.Property<Guid>("IdTeacher")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("IdTeacher")
+                        .HasColumnType("int");
 
-                    b.Property<Guid?>("SessionId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int?>("SessionId")
+                        .HasColumnType("int");
 
                     b.Property<int?>("StudentId")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("TeacherId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int?>("TeacherId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -92,14 +94,16 @@ namespace University.Migrations
 
                     b.HasIndex("TeacherId");
 
-                    b.ToTable("Grades");
+                    b.ToTable("GradesItems");
                 });
 
             modelBuilder.Entity("University.Models.Session", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
@@ -118,7 +122,7 @@ namespace University.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Sessions");
+                    b.ToTable("SessionItems");
                 });
 
             modelBuilder.Entity("University.Models.Student", b =>
@@ -135,8 +139,8 @@ namespace University.Migrations
                     b.Property<string>("Specialization")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("UserId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
 
                     b.Property<int>("YearOfStudy")
                         .HasColumnType("int");
@@ -145,36 +149,40 @@ namespace University.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Students");
+                    b.ToTable("StudentsItems");
                 });
 
             modelBuilder.Entity("University.Models.Teacher", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("DidacticRole")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("Email")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("UserId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Teachers");
+                    b.ToTable("TeachersItems");
                 });
 
             modelBuilder.Entity("University.Models.User", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -193,7 +201,7 @@ namespace University.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("UsersItems");
                 });
 
             modelBuilder.Entity("University.Models.Course", b =>

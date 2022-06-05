@@ -22,24 +22,24 @@ namespace University.Controllers
 
         // GET: api/User
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<User>>> GetUsersItems()
         {
-          if (_context.Users == null)
+          if (_context.UsersItems == null)
           {
               return NotFound();
           }
-            return await _context.Users.ToListAsync();
+            return await _context.UsersItems.ToListAsync();
         }
 
         // GET: api/User/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(Guid id)
+        public async Task<ActionResult<User>> GetUser(int id)
         {
-          if (_context.Users == null)
+          if (_context.UsersItems == null)
           {
               return NotFound();
           }
-            var user = await _context.Users.FindAsync(id);
+            var user = await _context.UsersItems.FindAsync(id);
 
             if (user == null)
             {
@@ -52,7 +52,7 @@ namespace University.Controllers
         // PUT: api/User/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(Guid id, User user)
+        public async Task<IActionResult> PutUser(int id, User user)
         {
             if (id != user.Id)
             {
@@ -85,11 +85,11 @@ namespace University.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
-          if (_context.Users == null)
+          if (_context.UsersItems == null)
           {
-              return Problem("Entity set 'UniversityContext.Users'  is null.");
+              return Problem("Entity set 'UniversityContext.UsersItems'  is null.");
           }
-            _context.Users.Add(user);
+            _context.UsersItems.Add(user);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetUser", new { id = user.Id }, user);
@@ -97,27 +97,27 @@ namespace University.Controllers
 
         // DELETE: api/User/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(Guid id)
+        public async Task<IActionResult> DeleteUser(int id)
         {
-            if (_context.Users == null)
+            if (_context.UsersItems == null)
             {
                 return NotFound();
             }
-            var user = await _context.Users.FindAsync(id);
+            var user = await _context.UsersItems.FindAsync(id);
             if (user == null)
             {
                 return NotFound();
             }
 
-            _context.Users.Remove(user);
+            _context.UsersItems.Remove(user);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool UserExists(Guid id)
+        private bool UserExists(int id)
         {
-            return (_context.Users?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.UsersItems?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

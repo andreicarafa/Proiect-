@@ -5,15 +5,16 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace University.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class Controllers : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Sessions",
+                name: "SessionItems",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Type = table.Column<bool>(type: "bit", nullable: false),
                     UniversityYear = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Semester = table.Column<int>(type: "int", nullable: false),
@@ -22,14 +23,15 @@ namespace University.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Sessions", x => x.Id);
+                    table.PrimaryKey("PK_SessionItems", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Users",
+                name: "UsersItems",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -38,11 +40,11 @@ namespace University.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.Id);
+                    table.PrimaryKey("PK_UsersItems", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Students",
+                name: "StudentsItems",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -50,153 +52,155 @@ namespace University.Migrations
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     YearOfStudy = table.Column<int>(type: "int", nullable: false),
                     Specialization = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    UserId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Students", x => x.Id);
+                    table.PrimaryKey("PK_StudentsItems", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Students_Users_UserId",
+                        name: "FK_StudentsItems_UsersItems_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "UsersItems",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "Teachers",
+                name: "TeachersItems",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Email = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DidacticRole = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    UserId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Teachers", x => x.Id);
+                    table.PrimaryKey("PK_TeachersItems", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Teachers_Users_UserId",
+                        name: "FK_TeachersItems_UsersItems_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "UsersItems",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "Courses",
+                name: "CoursesItems",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IdTeacher = table.Column<int>(type: "int", nullable: false),
                     CourseName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TeacherId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    TeacherId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Courses", x => x.Id);
+                    table.PrimaryKey("PK_CoursesItems", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Courses_Teachers_TeacherId",
+                        name: "FK_CoursesItems_TeachersItems_TeacherId",
                         column: x => x.TeacherId,
-                        principalTable: "Teachers",
+                        principalTable: "TeachersItems",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "Grades",
+                name: "GradesItems",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IdCourse = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IdStudent = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IdTeacher = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IdSession = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IdCourse = table.Column<int>(type: "int", nullable: false),
+                    IdStudent = table.Column<int>(type: "int", nullable: false),
+                    IdTeacher = table.Column<int>(type: "int", nullable: false),
+                    IdSession = table.Column<int>(type: "int", nullable: false),
                     GradeValue = table.Column<int>(type: "int", nullable: false),
                     ExamDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CourseId = table.Column<int>(type: "int", nullable: true),
                     StudentId = table.Column<int>(type: "int", nullable: true),
-                    TeacherId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    SessionId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    TeacherId = table.Column<int>(type: "int", nullable: true),
+                    SessionId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Grades", x => x.Id);
+                    table.PrimaryKey("PK_GradesItems", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Grades_Courses_CourseId",
+                        name: "FK_GradesItems_CoursesItems_CourseId",
                         column: x => x.CourseId,
-                        principalTable: "Courses",
+                        principalTable: "CoursesItems",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Grades_Sessions_SessionId",
+                        name: "FK_GradesItems_SessionItems_SessionId",
                         column: x => x.SessionId,
-                        principalTable: "Sessions",
+                        principalTable: "SessionItems",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Grades_Students_StudentId",
+                        name: "FK_GradesItems_StudentsItems_StudentId",
                         column: x => x.StudentId,
-                        principalTable: "Students",
+                        principalTable: "StudentsItems",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Grades_Teachers_TeacherId",
+                        name: "FK_GradesItems_TeachersItems_TeacherId",
                         column: x => x.TeacherId,
-                        principalTable: "Teachers",
+                        principalTable: "TeachersItems",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Courses_TeacherId",
-                table: "Courses",
+                name: "IX_CoursesItems_TeacherId",
+                table: "CoursesItems",
                 column: "TeacherId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Grades_CourseId",
-                table: "Grades",
+                name: "IX_GradesItems_CourseId",
+                table: "GradesItems",
                 column: "CourseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Grades_SessionId",
-                table: "Grades",
+                name: "IX_GradesItems_SessionId",
+                table: "GradesItems",
                 column: "SessionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Grades_StudentId",
-                table: "Grades",
+                name: "IX_GradesItems_StudentId",
+                table: "GradesItems",
                 column: "StudentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Grades_TeacherId",
-                table: "Grades",
+                name: "IX_GradesItems_TeacherId",
+                table: "GradesItems",
                 column: "TeacherId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Students_UserId",
-                table: "Students",
+                name: "IX_StudentsItems_UserId",
+                table: "StudentsItems",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Teachers_UserId",
-                table: "Teachers",
+                name: "IX_TeachersItems_UserId",
+                table: "TeachersItems",
                 column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Grades");
+                name: "GradesItems");
 
             migrationBuilder.DropTable(
-                name: "Courses");
+                name: "CoursesItems");
 
             migrationBuilder.DropTable(
-                name: "Sessions");
+                name: "SessionItems");
 
             migrationBuilder.DropTable(
-                name: "Students");
+                name: "StudentsItems");
 
             migrationBuilder.DropTable(
-                name: "Teachers");
+                name: "TeachersItems");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "UsersItems");
         }
     }
 }
