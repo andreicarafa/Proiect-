@@ -26,6 +26,8 @@ if (builder.Environment.IsDevelopment())
     //app.UseSwagger();
     //app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TodoApi v1"));
 }
+app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+
 
 app.UseHttpsRedirection();
 
